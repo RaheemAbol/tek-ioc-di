@@ -31,10 +31,10 @@
             <td th:text="${user.terms ? 'Yes' : 'No'}"></td>
             <td>
                 <a id="edit-button" th:href="@{/users/editUser(index=${i.index})}">Edit</a> |
-                <form th:action="@{/users/deleteUser}" method="post" style="display:inline;">
+                <form id="deleteForm" th:action="@{/users/deleteUser}" method="post" style="display:inline;">
                     <input type="hidden" name="_method" value="delete" />
                     <input type="hidden" name="index" th:value="${i.index}" />
-                    <button id="no-style" type="submit">Delete</button>
+                    <button type="submit">Delete</button>
                 </form>
                 |
                 <a id="view-cart" th:href="@{/cart/{userId}(userId=${i.index})}">View Cart</a>
