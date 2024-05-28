@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Item to Cart</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Add Item to Cart</h1>
+    <form id="addItemForm" th:action="@{/cart/addItem}" th:object="${cartItem}" method="post">
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" th:field="*{itemName}" placeholder="Item Name" required/>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" th:field="*{quantity}" placeholder="Quantity" required/>
+
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" id="price" th:field="*{price}" placeholder="Price" required/>
+
+        <input type="hidden" name="userId" th:value="${userId}" />
+        <button type="submit">Add Item</button>
+    </form>
+    <br>
+    <a th:href="@{/cart/{userId}(userId=${userId})}">Back to Cart</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Cart</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div class="container">
+    <h2 th:text="${userName} + ' \'s Shopping Cart'">Your Shopping Cart</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, i : ${cart}">
+            <td th:text="${item.itemName}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.price}"></td>
+            <td>
+                <a th:href="@{/cart/editItem/{userId}/{index}(userId=${userId}, index=${i.index})}">Edit</a> |
+                <form th:action="@{/cart/deleteItem}" method="post" style="display:inline;">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="hidden" name="userId" th:value="${userId}" />
+                    <input type="hidden" name="index" th:value="${i.index}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/cart/addItemForm/{userId}(userId=${userId})}">Add Another Item</a>
+    <a th:href="@{/cart/clearCart/{userId}(userId=${userId})}">Clear Cart</a>
+    <br>
+    <a th:href="@{/users/allUsers}">Back to All Users</a>
+</div>
+</body>
+</html>
